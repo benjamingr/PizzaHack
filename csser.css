@@ -1,0 +1,90 @@
+body {
+    /*margin-left: 200px;*/
+    background: #5d9ab2 url("bckgrd.jpg") no-repeat top left;
+    background-size: cover;
+}
+.holder{
+    width:75%;
+    background-color: #69898D;
+    margin-top: 5%;
+    border-radius: 5%;
+    position:fixed;
+}
+.rFloat{
+    float:right;
+}
+.search{
+    margin-right:30px;
+}
+.loginBCK{
+    width:30%;
+    height:30%;
+    background-color: #69898D;
+    margin-top: 5%;
+    margin-left:25%;
+    border-radius: 5%;
+    position:fixed;
+}
+.welcome{
+    height:70%;
+}
+.head{
+    width:80%;
+    height:10%;
+    background-color:white;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 30%;
+    background-color: #69898D;
+    display:inline-block;
+}
+.lFloat{
+    float:left;
+}
+.lmarg{
+    margin-left:100px;
+}
+.lmarg30{
+    margin-left:30px;
+}
+.fillWidth{
+    width:100%;
+}
+.linkContainer{
+    margin-left:10%;
+    margin-bottom:5px;
+    margin-top:10px;
+}
+
+.link{
+    font-weight:bold;
+    color:#660000;
+    font-size: 25px;
+    text-decoration:none;
+    font-family:"Agency FB";
+}
+.inner{
+    margin:20px;
+    height:100%;
+}
+.about{
+    height:50%
+}
+.inline{
+    display:inline-block;
+}
+.name{
+    color:#470000;
+    font-weight:bold;
+    font-style:italic;
+    font-size:20px;
+}
+.desc{
+    font-size:18px;
+}
+.pizzaN{
+    font-weight:bold;
+    color:#B20000;
+}
+.pizzaD{
+    margin-left:10px;
+}

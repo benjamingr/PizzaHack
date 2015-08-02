@@ -1,0 +1,89 @@
+<HTML>
+ <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://kripken.github.io/sql.js/js/sql.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+<script src='http://www.rich-harris.co.uk/ramjet/ramjet.js' > </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.5.0/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.5.0/mode/sql/sql.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.5.0/addon/hint/sql-hint.min.js"></script>
+
+    <head>
+        <title>PizzaHack</title>
+    </head>
+    <body>
+        <nav class='amber darken-3'>
+            <div class="nav-wrapper">
+              <a href="#welcome" class="brand-logo">&#x1f355; PizzaHack</a>
+              <ul id="nav-mobile" class="right">
+                <li><a href="#pizzas">Pizzzas</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#login">Login</a></li>
+                <li><a href="#search"><i class="material-icons">search</i></a></li>
+
+              </ul>
+            </div>
+        </nav>
+        <div class='container view'>
+        
+        </div>
+<script src="./db.js"></script>
+<script type="text/javascript">
+
+function loadView(name, callback){
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(){
+        var view = document.querySelector(".view");
+        view.innerHTML = xhr.responseText;
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open("GET","./views/" + name + ".js");
+        xhr2.send();
+        xhr2.onload = function() {
+            eval(xhr2.responseText);
+            callback && callback();
+        };
+    };
+    xhr.open("GET", "./views/" + name + ".html");
+    xhr.send();
+}
+
+
+var db = new Database();
+db.bootstrap();
+db.restore();
+
+function routeChange(hash){
+    location.hash = hash;
+    loadView(hash)
+}
+if(location.hash.length > 2){ 
+    routeChange(String(location.hash).substring(1));
+} else {
+    routeChange("login");
+}
+window.onhashchange = function(e){
+    loadView(String(location.hash).substring(1));
+}
+
+function login(user, pass){
+    if (pass.length == 0 || user.length == 0){
+        return false;
+    } else {
+        var sqlcommand = "SELECT * FROM Users123 where uname = '"+user + "' AND passw = '" + pass + "';";
+        //add weakness to code, iterate over result and check if login is correct
+        //display result
+        var ret = db.exec(sqlcommand);
+        if(ret && ret.values && ret.values.length > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+</script>
+</body>
+</html>

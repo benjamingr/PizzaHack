@@ -1,7 +1,7 @@
 (function(){ 
 
 	var pizzas = document.getElementById("pizzas");
-	var res = db.exec("SELECT * FROM piizas LIMIT 5");
+	var res = db.exec("SELECT * FROM pizzas LIMIT 5");
 	var table = "<table class='bordered striped hoverable centered'>"
 	for(var i = 0; i < res.values.length; i++){
 		var value = res.values[i];

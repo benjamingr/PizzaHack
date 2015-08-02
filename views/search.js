@@ -27,14 +27,14 @@
 
 
 		var pizzas = document.getElementById("pizzas");
-		var res = db.exec("SELECT * FROM piizas WHERE name LIKE '" + q + "'");
-		if(!res || !res.values){
+		var res = db.execAll("SELECT * FROM pizzas WHERE name LIKE '" + q + "'");
+		if(!res || res.length === 0){
 			pizzas.innerHTML = "No Results Found :( <br /> <img src='kitten.jpg'> <br /> <br /> <br /> <br /> <br /> <br /> ";
 			return;
 		}
 		var table = "<table class='bordered striped hoverable centered'>"
-		for(var i = 0; i < res.values.length; i++){
-			var value = res.values[i];
+		for(var i = 0; i < res.length; i++){
+			var value = res[i];
 			table += "<tr><td><img src='http://lorempizza.com/100/100?breaker="+(new Date())+ "' /></td><td>" + value[0] + "</td><td>" + value[1] + "</td><td>" + value[2] + "</td></tr>"
 		}
 		table += "</table>";

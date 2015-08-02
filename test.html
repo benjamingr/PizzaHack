@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hi</title>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://kripken.github.io/sql.js/js/sql.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.5.0/codemirror.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.5.0/codemirror.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.5.0/mode/sql/sql.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.5.0/addon/hint/sql-hint.min.js"></script>
+<style>
+#result {
+	margin-top: 20px;
+}
+</style>
+</head>
+<body>
+   <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">SQL Playground</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      </ul>
+    </div>
+  </nav>
+        <br /><br /><br /><br />
+   <div class="container">
+
+	<form id='runForm'>
+		<textarea name='command'>SELECT * FROM hello</textarea>
+		<!-- <input name='command' value=''> -->
+		<input type='submit' value="Run" /> 
+		<input type='button' name='save' value="Save">
+	</form>
+	<div id='result'></div>
+	</div>
+<script>
+
+	var db = new SQL.Database();
+	var sqlstr = "CREATE TABLE hello (a int, b char);";
+	sqlstr += "INSERT INTO hello VALUES (0, 'hello');"
+	sqlstr += "INSERT INTO hello VALUES (1, 'world');"
+	db.run(sqlstr);
+	
+
+    var historyJson = localStorage.getItem("history");
+    if(!historyJson) {
+    	historyJson = "[]";
+    }
+    var dbHistory = JSON.parse(historyJson);
+
+    dbHistory.forEach(function(cmd){
+    	db.run(cmd);
+    });
+
+    // form stuff
+	var form = document.querySelector("#runForm"),
+		result = document.querySelector("#result");
+	form.addEventListener("submit", function(e){
+		e.preventDefault();
+		dbHistory.push(form.command.value);
+		localStorage.setItem("history", JSON.stringify(dbHistory));
+		var res = printResult(db.exec(form.command.value)[0]);
+		
+		result.innerHTML = res;
+	});
+
+	function printResult(res){
+		var out = "<table class='striped' class='hoverable'><tr>";
+		out += res.columns.map(function(el){
+			return "<td>" + el +"</td>";
+		}).join(" ") + "</tr>";
+
+		out += res.values.map(function(el){
+			return "<tr>" + el.map(function(v){
+				// console.log(v);
+				return "<td>" + [].concat(v).join("") + "</td>";
+			}).join("") + "</tr>";
+		}).join(" ");
+		return out + "</table>";
+	}
+    var editor = CodeMirror.fromTextArea(form.command, {
+      lineNumbers: true,
+      mode: "text/x-sql"
+    });
+
+</script>
+</body>
+</html>

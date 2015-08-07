@@ -22,3 +22,7 @@ There is an attached exercise file, currently it is in Hebrew. The tasks are:
  - Change the price of Pizzas to 10.
  
 For obvious reasons, any "client side" tinkering (like using the developer tools) is prohibited.
+
+## Why is the code ugly?
+
+Because it was written in one go, I was sleep deprived when I wrote it and it worked. There is basic routing and view management through loading HTML/CSS pages. jQuery was added in retrospect because Materialize needed it - code can be simplified to use more jQuery to be slimmer. The route `index.html#<route>` loads `views/<route>.html`, places it in the view, then loads `views/<route>.js` and `eval`s it. 

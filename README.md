@@ -26,3 +26,15 @@ For obvious reasons, any "client side" tinkering (like using the developer tools
 ## Why is the code ugly?
 
 Because it was written in one go, I was sleep deprived when I wrote it and it worked. There is basic routing and view management through loading HTML/CSS pages. jQuery was added in retrospect because Materialize needed it - code can be simplified to use more jQuery to be slimmer. The route `index.html#<route>` loads `views/<route>.html`, places it in the view, then loads `views/<route>.js` and `eval`s it. 
+
+## Why aren't the jokes funny?
+
+Because of [this guy](https://www.facebook.com/galgalatz?fref=ts), he has spent the last three years making my jokes less and less funny until I eventually sort of gave up on sane or sophisticated humor. Hey, Rebecca's happy - right? Right? Right?
+
+## What is Uziely? Why should he forgive?
+
+Uziely is [Nitzan Uziely](https://www.facebook.com/nitzan.uziely?fref=ts), he should forgive [Inbal](https://www.facebook.com/inbalooloo?fref=ts) so they can be friends again just like in freshmen year. Here is an [accurate description](http://i.imgur.com/lSOBWD5.jpg) of the conflict. Also that joke never apprears in the PizzaHack site.
+
+## Who is Robert Lemon? Did He Really Do a #2 on a Slide?
+
+[No Comment.](http://chat.stackoverflow.com/transcript/message/8231986#8231986)
